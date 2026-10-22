@@ -1,0 +1,15 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor folders
+.vscode/
+.idea/
+
+# Never publish these. Keep private files outside this folder entirely;
+# these rules are only a safety net.
+private/
+drafts/
+*.env
+.env*
