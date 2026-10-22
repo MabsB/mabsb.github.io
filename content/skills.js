@@ -20,9 +20,9 @@
     category: "Programming languages",
     items: [
       { name: "Python" },
-      { name: "Java", usedIn: ["Study Buddy"] },
+      { name: "Java", usedIn: ["Smart Gate", "Study Buddy"] },
       { name: "C#", aliases: ["c sharp", "csharp", ".net"] },
-      { name: "JavaScript", usedIn: ["MRT Bigasan"], aliases: ["js"] },
+      { name: "JavaScript", usedIn: ["Smart Gate", "MRT Bigasan"], aliases: ["js"] },
       { name: "PHP" },
       { name: "SQL", aliases: ["database", "query"] }
     ]
@@ -30,11 +30,11 @@
   {
     category: "Web development",
     items: [
-      { name: "HTML5", usedIn: ["MRT Bigasan"], aliases: ["html"] },
-      { name: "CSS3", usedIn: ["MRT Bigasan"], aliases: ["css"] },
-      { name: "Frontend development", usedIn: ["MRT Bigasan"], aliases: ["front-end", "ui"] },
+      { name: "HTML5", usedIn: ["Smart Gate", "MRT Bigasan"], aliases: ["html"] },
+      { name: "CSS3", usedIn: ["Smart Gate", "MRT Bigasan"], aliases: ["css"] },
+      { name: "Frontend development", usedIn: ["Smart Gate", "MRT Bigasan"], aliases: ["front-end", "ui"] },
       { name: "Responsive web design", aliases: ["mobile-friendly", "responsive"] },
-      { name: "Firebase Hosting", usedIn: ["MRT Bigasan"], aliases: ["deployment", "hosting"] },
+      { name: "Firebase Hosting", usedIn: ["Smart Gate", "MRT Bigasan"], aliases: ["deployment", "hosting"] },
       { name: "Cloudflare", usedIn: ["MRT Bigasan"], aliases: ["dns", "cdn", "deployment"] }
     ]
   },
@@ -42,7 +42,7 @@
     category: "Databases and integration",
     items: [
       { name: "Cloud Firestore", usedIn: ["Smart Gate", "MRT Bigasan"], aliases: ["firebase", "database", "nosql"] },
-      { name: "Firebase Authentication", usedIn: ["Smart Gate"], aliases: ["firebase", "auth", "login"] },
+      { name: "Firebase Authentication", usedIn: ["Smart Gate", "MRT Bigasan"], aliases: ["firebase", "auth", "login"] },
       { name: "MySQL", aliases: ["database", "sql"] },
       { name: "REST APIs", aliases: ["api", "http"] },
       { name: "CRUD operations", usedIn: ["Smart Gate", "MRT Bigasan"], aliases: ["database"] },
@@ -53,9 +53,9 @@
   {
     category: "Mobile development",
     items: [
-      { name: "Android development", usedIn: ["Study Buddy"], aliases: ["mobile", "app"] },
-      { name: "Android Studio", usedIn: ["Study Buddy"], aliases: ["mobile", "ide"] },
-      { name: "Bluetooth serial communication", usedIn: ["Study Buddy"], aliases: ["bluetooth", "rfcomm", "spp", "iot"] },
+      { name: "Android development", usedIn: ["Smart Gate", "Study Buddy"], aliases: ["mobile", "app"] },
+      { name: "Android Studio", usedIn: ["Smart Gate", "Study Buddy"], aliases: ["mobile", "ide"] },
+      { name: "Bluetooth serial communication", usedIn: ["Smart Gate", "Study Buddy"], aliases: ["bluetooth", "rfcomm", "spp", "iot"] },
       { name: "Kotlin (coursework)", aliases: ["kotlin", "mobile"] }
     ]
   },
@@ -78,7 +78,7 @@
       { name: "ESP32 DevKit V1", usedIn: ["Smart Gate"], aliases: ["esp32", "microcontroller", "iot"] },
       { name: "UHF RFID", usedIn: ["Smart Gate"], aliases: ["rfid", "iot"] },
       { name: "Servo motor control", usedIn: ["Smart Gate"], aliases: ["servo", "hardware"] },
-      { name: "Arduino", usedIn: ["Study Buddy"], aliases: ["microcontroller", "iot", "hardware"] },
+      { name: "Arduino", usedIn: ["Smart Gate", "Study Buddy"], aliases: ["microcontroller", "iot", "hardware"] },
       { name: "Microcontrollers", usedIn: ["Smart Gate", "Study Buddy"], aliases: ["embedded", "hardware", "iot"] },
       { name: "Sensor integration", aliases: ["sensors", "hardware", "iot"] },
       { name: "Hardware–software integration", usedIn: ["Smart Gate", "Study Buddy"], aliases: ["hardware", "iot", "integration"] }
