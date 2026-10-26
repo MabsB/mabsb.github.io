@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Bernabe Bertiz Maboloc Jr. – IT Student Portfolio</title>
   <meta name="description" content="Portfolio of Bernabe Bertiz Maboloc Jr., a fourth-year BS Information Technology student at National University – Fairview: IoT, web, and Android projects, technical skills, certifications, and resume.">
   <meta name="author" content="Bernabe Bertiz Maboloc Jr.">
-  <meta name="theme-color" content="#0A111D">
+  <meta name="theme-color" content="#f7fafb">
 
   <!-- If your site address is not https://mabsb.github.io/, update the four URLs below (see docs/DEPLOYMENT.md). -->
   <link rel="canonical" href="https://mabsb.github.io/">
@@ -25,18 +25,23 @@
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
-  <link rel="preload" href="assets/fonts/instrument-sans-var.woff" as="font" type="font/woff" crossorigin>
-  <link rel="preload" href="assets/fonts/bricolage-grotesque-var.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/fonts/oswald-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
 
   <script>
-    /* Apply the saved theme before the page paints, so it doesn't flash. */
+    /* Runs before the page paints: marks JavaScript as available, raises the loading
+       veil, applies the saved theme, and opens at the top (unless the link has a #section). */
     (function () {
       var root = document.documentElement;
-      root.classList.add('js');
+      root.classList.add('js', 'is-veiled');
       try {
         var saved = localStorage.getItem('theme');
         if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+      } catch (e) {}
+      try {
+        if (!location.hash && 'scrollRestoration' in history) history.scrollRestoration = 'manual';
+        if (!location.hash) window.scrollTo(0, 0);
       } catch (e) {}
     })();
   </script>
@@ -56,125 +61,257 @@
 </head>
 
 <body>
+  <!-- Loading veil: the BM mark fills from the top while the page compiles. Only shown when JavaScript runs. -->
+  <div class="veil" id="veil" role="status">
+    <span class="visually-hidden">Loading the portfolio</span>
+    <svg class="veil-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="veil-clip"><rect x="0" y="0" width="64" height="0" data-veil-fill/></clipPath>
+        
+      </defs>
+      <use href="#bm-glyphs" class="veil-ghost"/>
+      <g clip-path="url(#veil-clip)"><use href="#bm-glyphs" class="veil-fill"/></g>
+    </svg>
+    <span class="veil-meter"><span data-veil-meter></span></span>
+  </div>
+
+  <!-- The shape every project plate is cut to. -->
+  <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <path id="bm-glyphs" d="M12 39.44H20.44C25.27 39.44 27.81 37.09 27.81 33.57C27.81 30.6 25.88 28.87 23.38 28.58V28.55C25.62 27.93 27.01 26.39 27.01 23.98C27.01 20.72 24.47 18.56 20.07 18.56H12ZM15.64 36.43V30.3H20.13C22.6 30.3 24.01 31.51 24.01 33.44C24.01 35.36 22.57 36.43 20.04 36.43ZM15.64 27.4V21.57H19.9C22.02 21.57 23.31 22.69 23.31 24.49C23.31 26.27 22.02 27.4 19.9 27.4Z M30.16 39.44H33.81V28.79C33.81 27.39 33.74 25.22 33.7 23.16C34.42 25.41 35.13 27.57 35.56 28.79L39.57 39.44H42.6L46.58 28.79C47.02 27.51 47.74 25.22 48.48 22.86C48.43 25.01 48.36 27.32 48.36 28.79V39.44H52V18.56H46.65L42.65 29.53C42.27 30.7 41.6 32.78 41.11 34.41C40.62 32.78 39.95 30.7 39.55 29.53L35.49 18.56H30.16Z"/>
+    <clipPath id="plate-clip" clipPathUnits="objectBoundingBox"><path d="M 0.01915,0.00107H 0.98085C 0.98574,0.00107 0.99044,0.00300 0.99390,0.00642C 0.99736,0.00984 0.99930,0.01449 0.99930,0.01933V 0.88815C 0.99930,0.89299 0.99736,0.89763 0.99390,0.90105C 0.99044,0.90448 0.98574,0.90640 0.98085,0.90640H 0.64733C 0.63864,0.90640 0.63007,0.90834 0.62224,0.91206C 0.61442,0.91579 0.60754,0.92122 0.60212,0.92794L 0.56153,0.97830C 0.55635,0.98474 0.54976,0.98993 0.54227,0.99350C 0.53478,0.99707 0.52656,0.99892 0.51825,0.99892H 0.01915C 0.01426,0.99892 0.00956,0.99700 0.00610,0.99358C 0.00264,0.99016 0.00070,0.98551 0.00070,0.98067V 0.01933C 0.00070,0.01449 0.00264,0.00984 0.00610,0.00642C 0.00956,0.00300 0.01426,0.00107 0.01915,0.00107Z"/></clipPath>
+  </svg>
+
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="container header-inner">
+  <header class="site-header" data-header>
+    <div class="header-inner">
       <a class="brand" href="#home">
-        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="bm-bg" x="1" y="1" width="62" height="62" rx="15"/><rect class="bm-edge" x="1.75" y="1.75" width="60.5" height="60.5" rx="14.25"/><path class="bm-glyphs" d="M12 39.44H20.44C25.27 39.44 27.81 37.09 27.81 33.57C27.81 30.6 25.88 28.87 23.38 28.58V28.55C25.62 27.93 27.01 26.39 27.01 23.98C27.01 20.72 24.47 18.56 20.07 18.56H12ZM15.64 36.43V30.3H20.13C22.6 30.3 24.01 31.51 24.01 33.44C24.01 35.36 22.57 36.43 20.04 36.43ZM15.64 27.4V21.57H19.9C22.02 21.57 23.31 22.69 23.31 24.49C23.31 26.27 22.02 27.4 19.9 27.4Z M30.16 39.44H33.81V28.79C33.81 27.39 33.74 25.22 33.7 23.16C34.42 25.41 35.13 27.57 35.56 28.79L39.57 39.44H42.6L46.58 28.79C47.02 27.51 47.74 25.22 48.48 22.86C48.43 25.01 48.36 27.32 48.36 28.79V39.44H52V18.56H46.65L42.65 29.53C42.27 30.7 41.6 32.78 41.11 34.41C40.62 32.78 39.95 30.7 39.55 29.53L35.49 18.56H30.16Z"/><rect class="bm-signal" x="12" y="45.44" width="12" height="3.2" rx="1.6"/></svg>
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="bm-bg" x="1" y="1" width="62" height="62" rx="15"/><rect class="bm-edge" x="1.75" y="1.75" width="60.5" height="60.5" rx="14.25"/><use class="bm-glyphs" href="#bm-glyphs"/><rect class="bm-signal" x="12" y="45.44" width="12" height="3.2" rx="1.6"/></svg>
         <span class="brand-name">Bernabe Maboloc Jr.</span>
       </a>
 
       <nav class="site-nav" aria-label="Main">
         <ul class="nav-menu" id="nav-menu">
+          <li><a href="#about">About</a></li>
           <li><a href="#projects">Work</a></li>
           <li><a href="#skills">Skills</a></li>
-          <li><a href="#about">About</a></li>
           <li><a href="#certifications">Credentials</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch to light theme" title="Switch to light theme">
+        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme">
           <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
           <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6Z"/></svg>
         </button>
-        <a class="btn btn-primary btn-sm header-resume" href="#resume">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg>
-          Resume
+        <a class="cta cta--sm header-resume" href="#resume">
+          <span class="cta-flood" aria-hidden="true"></span>
+          <span class="cta-label">Resume</span>
+          <svg class="cta-arrow" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg>
         </a>
-        <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
-          <svg class="icon icon-menu" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
-          <svg class="icon icon-close" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="menu-sheet" aria-label="Open menu">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
         </button>
       </div>
     </div>
   </header>
 
+  <!-- Full-screen menu for phones and tablets. Built from the header links by main.js. -->
+  <div class="sheet" id="menu-sheet" role="dialog" aria-modal="true" aria-label="Menu" hidden data-stage data-stage-margin="0px">
+    <div class="sheet-top">
+      <p class="sheet-title">Menu</p>
+      <button class="icon-btn sheet-close" type="button" aria-label="Close menu">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav class="sheet-nav" aria-label="Menu"></nav>
+    <p class="sheet-foot"><a href="mailto:bernabemaboloc3@gmail.com?subject=Internship%20opportunity">bernabemaboloc3@gmail.com</a></p>
+  </div>
+
   <main id="main">
-    <!-- HOME ---------------------------------------------------------------->
-    <section id="home" class="hero dotgrid" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="status-pill"><span class="status-dot" aria-hidden="true"></span>Available for an onsite IT internship / OJT</p>
-          <h1 id="hero-title" class="hero-title">I build systems where <span class="accent-text">hardware meets the web.</span></h1>
-          <p class="hero-intro">I’m Bernabe Bertiz Maboloc Jr., a fourth-year BS Information Technology student at National University&nbsp;– Fairview. I connect ESP32 and Arduino devices to Firebase-backed web and Android apps, and I’m looking for a team where I can troubleshoot real systems and keep learning.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">
-              See my projects
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="btn btn-ghost" href="assets/resume/Bernabe-Maboloc-Jr-Resume.pdf" download="Bernabe-Maboloc-Jr-Resume.pdf">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg>
-              Download resume
-            </a>
-            <a class="btn btn-ghost" href="https://github.com/MabsB" target="_blank" rel="noopener">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 19c-4 1.3-4-2-6-2.5M15 22v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V22"/></svg>
-              GitHub
-              <span class="visually-hidden">(opens in a new tab)</span>
-            </a>
-          </div>
-        </div>
+    <!-- The first three blocks are a stack: each pins, and the next one comes out over it. -->
+    <div class="stack" data-stack>
 
-        <aside class="glance" aria-labelledby="glance-title">
-          <h2 id="glance-title" class="eyebrow">At a glance</h2>
-          <!-- The first three numbers are counted from the content files when the page loads. -->
-          <dl class="stats">
-            <div class="stat"><dt>projects built end to end</dt><dd data-stat="projects">3</dd></div>
-            <div class="stat"><dt>courses and certifications</dt><dd data-stat="certificates">25</dd></div>
-            <div class="stat"><dt>site live in production</dt><dd data-stat="live">1</dd></div>
-            <div class="stat"><dt>expected graduation</dt><dd>2027</dd></div>
-          </dl>
-          <dl class="facts">
-            <div><dt>Recognition</dt><dd>Consistent Dean’s Lister</dd></div>
-            <div><dt>Track</dt><dd>Mobile &amp; Internet Technology</dd></div>
-            <div><dt>Based in</dt><dd>Metro Manila, Philippines</dd></div>
-          </dl>
-        </aside>
-      </div>
+      <!-- HOME ------------------------------------------------------------>
+      <div class="layer layer--hero" data-layer data-pinned>
+        <div class="layer-inner" data-layer-inner>
+          <section id="home" class="hero" data-hero data-surface="light" aria-labelledby="hero-title">
+            <canvas class="contour" data-contour="hero" aria-hidden="true"></canvas>
 
-      <div class="container tech-strip">
-        <span class="eyebrow">Works with</span>
-        <ul aria-label="Technologies I work with">
-          <li>ESP32</li><li>UHF RFID</li><li>Firebase</li><li>Cloud Firestore</li><li>JavaScript</li><li>Java / Android</li><li>Arduino</li><li>Cloudflare</li>
-        </ul>
-      </div>
-    </section>
+            <div class="hero-stage" data-stage data-stage-margin="0px">
+              <div class="hero-identity" data-rise data-delay="120" data-cfg="entrance">
+                <p class="eyebrow">Portfolio</p>
+                <p class="hero-name">Bernabe Bertiz Maboloc Jr.</p>
+                <ul class="meta" aria-label="About me in brief">
+                  <li>BS Information Technology</li>
+                  <li>National University&nbsp;– Fairview</li>
+                  <li>Mobile &amp; Internet Technology</li>
+                  <li>Metro Manila, Philippines</li>
+                </ul>
+              </div>
 
-    <!-- PROJECTS ------------------------------------------------------------>
-    <section id="projects" class="section" aria-labelledby="projects-title">
-      <div class="container">
-        <div class="section-head section-head--split">
-          <div>
-            <p class="kicker">01 — Selected work</p>
-            <h2 id="projects-title">Projects, and what I actually built</h2>
-          </div>
-          <div class="filter-bar" id="project-filters" role="group" aria-label="Filter projects by area"></div>
-        </div>
-        <p class="visually-hidden" id="project-status" aria-live="polite"></p>
-        <div id="project-list" class="project-list">
-          <noscript><p class="load-note">Turn on JavaScript to see the projects, or download the resume below.</p></noscript>
-        </div>
-      </div>
-    </section>
+              <div class="hero-panels">
+                <section class="panel panel--status" data-rise data-delay="520" data-cfg="entrance" aria-label="Status">
+                  <p class="eyebrow">Status</p>
+                  <p class="panel-line"><span class="status-dot" data-pulse aria-hidden="true"></span>Available for an onsite IT internship / OJT</p>
+                </section>
 
-    <!-- SKILLS -------------------------------------------------------------->
-    <section id="skills" class="section" aria-labelledby="skills-title">
-      <div class="container">
-        <div class="section-head section-head--split">
-          <div>
-            <p class="kicker">02 — Skills</p>
-            <h2 id="skills-title">Proven in a project, not just listed</h2>
-            <p class="section-lead">The table shows where I applied each skill. Coursework and self-study follow below.</p>
-          </div>
-          <div class="toolbar">
-            <div class="search">
-              <label class="visually-hidden" for="skill-search">Search skills</label>
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
-              <input id="skill-search" type="search" placeholder="Search skills, e.g. Firebase" autocomplete="off" spellcheck="false" aria-describedby="skill-status">
+                <aside class="panel panel--stats glance" data-rise data-delay="620" data-cfg="entrance" aria-labelledby="glance-title">
+                  <h2 id="glance-title" class="eyebrow">At a glance</h2>
+                  <!-- The first three numbers are counted from the content files when the page loads. -->
+                  <dl class="stats">
+                    <div class="stat"><dt>projects built end to end</dt><dd data-stat="projects" data-reveal="letters" data-delay="800" data-stagger="24" data-cfg="figure">3</dd></div>
+                    <div class="stat"><dt>courses and certifications</dt><dd data-stat="certificates" data-reveal="letters" data-delay="910" data-stagger="24" data-cfg="figure">25</dd></div>
+                    <div class="stat"><dt>site live in production</dt><dd data-stat="live" data-reveal="letters" data-delay="1020" data-stagger="24" data-cfg="figure">1</dd></div>
+                    <div class="stat"><dt>expected graduation</dt><dd data-reveal="letters" data-delay="1130" data-stagger="24" data-cfg="figure">2027</dd></div>
+                  </dl>
+                </aside>
+              </div>
+
+              <div class="hero-headline">
+                <h1 id="hero-title" class="hero-title">
+                  <span class="ml"><span data-reveal="words" data-delay="200" data-stagger="70" data-cfg="reveal">I build systems where</span></span>
+                  <span class="ml ml--accent"><span data-reveal="words" data-delay="330" data-stagger="70" data-cfg="reveal">hardware meets</span></span>
+                  <span class="ml ml--accent"><span data-reveal="words" data-delay="460" data-stagger="70" data-cfg="reveal">the web.</span></span>
+                </h1>
+                <p class="hero-intro" data-rise data-delay="620" data-cfg="entrance">I’m Bernabe Bertiz Maboloc Jr., a fourth-year BS Information Technology student at National University&nbsp;– Fairview. I connect ESP32 and Arduino devices to Firebase-backed web and Android apps, and I’m looking for a team where I can troubleshoot real systems and keep learning.</p>
+              </div>
+
+              <div class="hero-foot">
+                <div class="hero-actions" data-rise data-delay="780" data-cfg="entrance">
+                  <a class="cta" href="#projects">
+                    <span class="cta-flood" aria-hidden="true"></span>
+                    <span class="cta-label">See my projects</span>
+                    <svg class="cta-arrow" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg>
+                  </a>
+                  <a class="cta cta--ghost" href="assets/resume/Bernabe-Maboloc-Jr-Resume.pdf" download="Bernabe-Maboloc-Jr-Resume.pdf">
+                    <span class="cta-flood" aria-hidden="true"></span>
+                    <span class="cta-label">Download resume</span>
+                    <svg class="cta-arrow cta-arrow--down" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg>
+                  </a>
+                  <a class="cta cta--ghost" href="https://github.com/MabsB" target="_blank" rel="noopener">
+                    <span class="cta-flood" aria-hidden="true"></span>
+                    <span class="cta-label">GitHub<span class="visually-hidden"> (opens in a new tab)</span></span>
+                    <svg class="cta-arrow" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg>
+                  </a>
+                </div>
+                <div class="tech-strip" data-rise data-delay="900" data-cfg="entrance">
+                  <span class="eyebrow">Works with</span>
+                  <ul aria-label="Technologies I work with">
+                    <li>ESP32</li><li>UHF RFID</li><li>Firebase</li><li>Cloud Firestore</li><li>JavaScript</li><li>Java / Android</li><li>Arduino</li><li>Cloudflare</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <p class="toolbar-status" id="skill-status" aria-live="polite"></p>
+          </section>
+        </div>
+        <div class="layer-shade" data-layer-shade aria-hidden="true"></div>
+      </div>
+
+      <!-- ABOUT ----------------------------------------------------------->
+      <div class="layer layer--about" data-layer data-pinned>
+        <div class="layer-inner" data-layer-inner>
+          <section id="about" class="about" data-about data-surface="dark" aria-labelledby="about-title">
+            <div class="circuit" data-circuit-frame aria-hidden="true"><div data-circuit></div></div>
+            <canvas class="dissolve" data-dissolve="light" aria-hidden="true"></canvas>
+
+            <div class="about-grid">
+              <div class="about-copy" data-stage>
+                <p class="kicker" data-rise data-delay="0">01 — About</p>
+                <h2 id="about-title" class="masthead masthead--accent">
+                  <span class="ml"><span data-reveal="words" data-delay="0" data-stagger="110" data-cfg="reveal">practical builder,</span></span>
+                  <span class="ml"><span data-reveal="words" data-delay="130" data-stagger="110" data-cfg="reveal">steady learner</span><span class="stop" data-fade data-delay="240" data-cfg="reveal">.</span></span>
+                </h2>
+                <span class="rule" data-rule data-delay="260" aria-hidden="true"></span>
+                <div class="prose">
+                  <p data-rise data-delay="340" data-cfg="copy">I’m Bernabe, a fourth-year Bachelor of Science in Information Technology student at National University&nbsp;– Fairview, specializing in Mobile and Internet Technology. I’ve been a consistent Dean’s Lister, and I expect to graduate in 2027.</p>
+                  <p data-rise data-delay="440" data-cfg="copy">My hands-on experience comes from academic and project work: wiring an ESP32 and a UHF RFID reader to a Firebase web app, shipping a live e-commerce site behind Cloudflare, and debugging Bluetooth between an Android app and an Arduino.</p>
+                  <p data-rise data-delay="540" data-cfg="copy">Beyond projects, I’ve completed Cisco Networking Academy courses in networking and cybersecurity, worked with REST APIs, and explored AI-assisted development, YOLO object detection, and n8n workflow automation. I’m looking for an onsite internship where I can troubleshoot real systems and contribute to a technical team.</p>
+                </div>
+                <h3 class="eyebrow eyebrow--dark" data-rise data-delay="620">Areas I want to grow in</h3>
+                <ul class="pill-list" data-rise data-delay="680" data-cfg="copy">
+                  <li>Web development</li>
+                  <li>Software development</li>
+                  <li>IT support</li>
+                  <li>Networking &amp; infrastructure</li>
+                  <li>Cybersecurity fundamentals</li>
+                  <li>AI-assisted development</li>
+                  <li>Workflow automation</li>
+                  <li>IoT integration</li>
+                </ul>
+              </div>
+
+              <aside class="plate-card" data-stage aria-label="Education at a glance">
+                <svg class="plate-frame" viewBox="0 0 277 78" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0.5 0.5H276.5V69L268 77.5H0.5Z"/><path d="M83 1V77" class="plate-divider"/></svg>
+                <div class="plate-badge" data-rise data-delay="260" data-cfg="reveal">
+                  <svg class="orbit" viewBox="0 0 37 23" aria-hidden="true" focusable="false"><ellipse cx="18.5" cy="11.5" rx="18" ry="11"/><path d="M0.5 11.5H36.5"/><ellipse data-orbit cx="18.5" cy="11.5" rx="18" ry="11"/></svg>
+                  <p class="plate-badge-text"><span data-reveal="letters" data-delay="430" data-stagger="22">BSIT</span><span class="acc" data-reveal="letters" data-delay="490" data-stagger="22">/ 2027</span></p>
+                </div>
+                <dl class="plate-stats" data-rise data-delay="300" data-cfg="reveal">
+                  <div><dt data-reveal="letters" data-delay="430" data-stagger="22">4th</dt><dd data-reveal="letters" data-delay="500" data-stagger="16">year student</dd></div>
+                  <div><dt data-reveal="letters" data-delay="540" data-stagger="22">2027</dt><dd data-reveal="letters" data-delay="610" data-stagger="16">graduating</dd></div>
+                  <div><dt data-reveal="letters" data-delay="650" data-stagger="22">DL</dt><dd data-reveal="letters" data-delay="720" data-stagger="16">dean’s lister</dd></div>
+                </dl>
+              </aside>
+            </div>
+            <p class="circuit-caption" data-circuit-caption hidden>
+              <span class="eyebrow">Signal chain</span>
+              <a href="#smart-gate" data-open-project="smart-gate">Smart Gate: how an RFID tag reaches the dashboard</a>
+            </p>
+          </section>
+        </div>
+        <div class="layer-shade" data-layer-shade aria-hidden="true"></div>
+      </div>
+
+      <!-- PROJECTS --------------------------------------------------------->
+      <div class="layer layer--work" data-layer>
+        <section id="projects" class="work" data-surface="dark" aria-labelledby="projects-title">
+          <canvas class="dissolve" data-dissolve="light" aria-hidden="true"></canvas>
+          <div class="work-head" data-stage>
+            <div class="work-title">
+              <p class="kicker" data-rise data-delay="0">02 — Selected work</p>
+              <h2 id="projects-title" class="masthead masthead--accent masthead--right">
+                <span class="ml"><span data-reveal="words" data-delay="0" data-stagger="110" data-cfg="reveal">projects, and what</span></span>
+                <span class="ml"><span data-reveal="words" data-delay="130" data-stagger="110" data-cfg="reveal">i actually built</span><span class="stop" data-fade data-delay="240" data-cfg="reveal">.</span></span>
+              </h2>
+            </div>
+            <div class="filter-bar" id="project-filters" role="group" aria-label="Filter projects by area" data-rise data-delay="320"></div>
+          </div>
+          <p class="visually-hidden" id="project-status" aria-live="polite"></p>
+          <div class="work-body">
+            <div class="rail" data-rail aria-hidden="true">
+              <svg class="rail-svg" preserveAspectRatio="none" focusable="false"></svg>
+            </div>
+            <div id="project-list" class="rows">
+              <noscript><p class="load-note">Turn on JavaScript to see the projects, or download the resume below.</p></noscript>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- SKILLS ------------------------------------------------------------>
+    <section id="skills" class="skills" data-surface="light" aria-labelledby="skills-title">
+      <canvas class="contour contour--paper" data-contour="paper" aria-hidden="true"></canvas>
+      <canvas class="dissolve" data-dissolve="dark" aria-hidden="true"></canvas>
+      <div class="skills-wrap">
+        <div class="skills-head" data-stage>
+          <p class="kicker" data-rise data-delay="0">03 — Skills</p>
+          <h2 id="skills-title" class="masthead masthead--xl">
+            <span class="ml"><span data-reveal="words" data-delay="0" data-stagger="100" data-cfg="reveal">proven in a project,</span></span>
+            <span class="ml"><span data-reveal="words" data-delay="130" data-stagger="100" data-cfg="reveal">not just listed</span><span class="stop" data-fade data-delay="240" data-cfg="reveal">.</span></span>
+          </h2>
+          <div class="skills-lead">
+            <p class="lead" data-reveal="words" data-delay="300" data-stagger="30" data-gap="0.22">The table shows where I applied each skill. Coursework and self-study follow below.</p>
+            <div class="toolbar" data-rise data-delay="520">
+              <div class="search">
+                <label class="visually-hidden" for="skill-search">Search skills</label>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+                <input id="skill-search" type="search" placeholder="Search skills, e.g. Firebase" autocomplete="off" spellcheck="false" aria-describedby="skill-status">
+              </div>
+              <p class="toolbar-status" id="skill-status" aria-live="polite"></p>
+            </div>
           </div>
         </div>
         <div id="skills-list" class="skills-layout">
@@ -183,71 +320,55 @@
       </div>
     </section>
 
-    <!-- ABOUT + EDUCATION --------------------------------------------------->
-    <section id="about" class="section" aria-labelledby="about-title">
-      <div class="container about-grid">
-        <div class="about-copy">
-          <p class="kicker">03 — About</p>
-          <h2 id="about-title">Practical builder, steady learner</h2>
-          <div class="prose">
-            <p>I’m Bernabe, a fourth-year Bachelor of Science in Information Technology student at National University&nbsp;– Fairview, specializing in Mobile and Internet Technology. I’ve been a consistent Dean’s Lister, and I expect to graduate in 2027.</p>
-            <p>My hands-on experience comes from academic and project work: wiring an ESP32 and a UHF RFID reader to a Firebase web app, shipping a live e-commerce site behind Cloudflare, and debugging Bluetooth between an Android app and an Arduino.</p>
-            <p>Beyond projects, I’ve completed Cisco Networking Academy courses in networking and cybersecurity, worked with REST APIs, and explored AI-assisted development, YOLO object detection, and n8n workflow automation. I’m looking for an onsite internship where I can troubleshoot real systems and contribute to a technical team.</p>
-          </div>
-          <h3 class="aside-heading">Areas I want to grow in</h3>
-          <ul class="pill-list">
-            <li>Web development</li>
-            <li>Software development</li>
-            <li>IT support</li>
-            <li>Networking &amp; infrastructure</li>
-            <li>Cybersecurity fundamentals</li>
-            <li>AI-assisted development</li>
-            <li>Workflow automation</li>
-            <li>IoT integration</li>
-          </ul>
+    <!-- EDUCATION + CREDENTIALS ------------------------------------------>
+    <section id="certifications" class="creds" data-surface="dark" aria-labelledby="certifications-title">
+      <canvas class="dissolve" data-dissolve="light" aria-hidden="true"></canvas>
+      <div class="creds-wrap">
+        <div class="creds-head" data-stage>
+          <p class="kicker" data-rise data-delay="0">04 — Education &amp; credentials</p>
+          <h2 id="certifications-title" class="masthead masthead--accent">
+            <span class="ml"><span data-reveal="words" data-delay="0" data-stagger="110" data-cfg="reveal"><span data-cert-total>25</span> courses,</span></span>
+            <span class="ml"><span data-reveal="words" data-delay="130" data-stagger="110" data-cfg="reveal">weighted toward security</span><span class="stop" data-fade data-delay="240" data-cfg="reveal">.</span></span>
+          </h2>
+          <p class="lead lead--dark" data-rise data-delay="330" data-cfg="copy">Course completions from Cisco Networking Academy and other providers, plus a workshop and an academic event.</p>
         </div>
 
-        <div id="education" class="edu-card" aria-labelledby="education-title">
-          <h2 id="education-title" class="eyebrow">Education</h2>
-          <ol class="timeline">
-            <li>
-              <span class="tl-dot" aria-hidden="true"></span>
-              <p class="tl-when">Fourth year · graduating 2027</p>
-              <h3>National University&nbsp;– Fairview</h3>
-              <p>Bachelor of Science in Information Technology</p>
-              <dl class="edu-details">
-                <div><dt>Specialization</dt><dd>Mobile and Internet Technology</dd></div>
-                <div><dt>School</dt><dd>School of Engineering and Technology (SET)</dd></div>
-                <div><dt>Campus</dt><dd>Quezon City, Metro Manila</dd></div>
-                <!-- To show your GWA, copy a row above, set dt to "GWA" and dd to your
-                     confirmed figure with its scale, for example "3.90 out of 4.00". -->
-              </dl>
+        <div id="education" class="edu" data-stage data-stage-margin="0px 0px -20% 0px" aria-labelledby="education-title">
+          <h3 id="education-title" class="eyebrow eyebrow--dark" data-rise data-delay="0">Education</h3>
+          <ol class="edu-strip">
+            <li class="edu-card" data-rise data-delay="140" data-cfg="reveal">
+              <p class="edu-round">Program</p>
+              <p class="edu-name">BS Information Technology</p>
+              <p class="edu-date">National University&nbsp;– Fairview</p>
             </li>
-            <li class="tl-award">
-              <span class="tl-dot" aria-hidden="true"></span>
-              <p class="tl-when">Recognition</p>
-              <h3>Consistent Dean’s Lister</h3>
+            <li class="edu-card" data-rise data-delay="230" data-cfg="reveal">
+              <p class="edu-round">Specialization</p>
+              <p class="edu-name">Mobile and Internet Technology</p>
+            </li>
+            <li class="edu-card" data-rise data-delay="320" data-cfg="reveal">
+              <p class="edu-round">School</p>
+              <p class="edu-name">Engineering and Technology (SET)</p>
+              <p class="edu-date">Quezon City, Metro Manila</p>
+            </li>
+            <li class="edu-card" data-rise data-delay="410" data-cfg="reveal">
+              <p class="edu-round">Recognition</p>
+              <p class="edu-name">Consistent Dean’s Lister</p>
+            </li>
+            <li class="edu-card edu-card--live" data-rise data-delay="500" data-cfg="reveal">
+              <p class="edu-round">Now · fourth year</p>
+              <p class="edu-name">Graduating 2027</p>
+              <p class="edu-date">Expected</p>
             </li>
           </ol>
-        </div>
-      </div>
-    </section>
 
-    <!-- CERTIFICATIONS ------------------------------------------------------>
-    <section id="certifications" class="section" aria-labelledby="certifications-title">
-      <div class="container">
-        <div class="section-head">
-          <p class="kicker">04 — Credentials</p>
-          <h2 id="certifications-title"><span data-cert-total>25</span> courses, weighted toward security</h2>
-          <p class="section-lead">Course completions from Cisco Networking Academy and other providers, plus a workshop and an academic event.</p>
         </div>
 
-        <div class="cert-overview">
-          <div class="cert-areas" aria-labelledby="cert-areas-title">
-            <h3 id="cert-areas-title" class="eyebrow">By area <span class="eyebrow-note">— select one to filter</span></h3>
+        <div class="cert-overview" data-stage>
+          <div class="cert-areas" data-rise data-delay="0" aria-labelledby="cert-areas-title">
+            <h3 id="cert-areas-title" class="eyebrow eyebrow--dark">By area <span class="eyebrow-note">— select one to filter</span></h3>
             <div id="cert-bars" class="cert-bars"></div>
           </div>
-          <div id="cert-highlight" class="cert-highlight"></div>
+          <div id="cert-highlight" class="cert-highlight" data-rise data-delay="120"></div>
         </div>
 
         <div class="toolbar toolbar--wide">
@@ -265,88 +386,115 @@
       </div>
     </section>
 
-    <!-- CONTACT + RESUME ---------------------------------------------------->
-    <section id="contact" class="section section--last" aria-labelledby="contact-title">
-      <div class="container">
-        <div class="contact-panel dotgrid">
-          <div class="contact-copy">
-            <p class="kicker">05 — Let’s talk</p>
-            <h2 id="contact-title">Looking for an onsite IT intern in Metro Manila?</h2>
-            <p class="contact-lead">Email is the best way to reach me about internship and OJT opportunities.</p>
-            <div class="contact-actions">
-              <a class="btn btn-primary btn-lg contact-email" href="mailto:bernabemaboloc3@gmail.com?subject=Internship%20opportunity">
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
-                bernabemaboloc3@gmail.com
+    <!-- CONTACT: the sign-off ---------------------------------------------->
+    <section id="contact" class="signoff" data-surface="accent" aria-labelledby="contact-title">
+      <div class="signoff-panel">
+        <canvas class="contour contour--foot" data-contour="foot" aria-hidden="true"></canvas>
+        <div class="signoff-figure" data-figure aria-hidden="true">
+          <svg viewBox="11 17.5 42 23" focusable="false"><use href="#bm-glyphs"/></svg>
+        </div>
+
+        <div class="signoff-top">
+          <a class="brand brand--foot" href="#home">
+            <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="bm-bg" x="1" y="1" width="62" height="62" rx="15"/><rect class="bm-edge" x="1.75" y="1.75" width="60.5" height="60.5" rx="14.25"/><use class="bm-glyphs" href="#bm-glyphs"/><rect class="bm-signal" x="12" y="45.44" width="12" height="3.2" rx="1.6"/></svg>
+            <span class="brand-name">Bernabe Maboloc Jr.</span>
+          </a>
+          <a class="to-top" href="#home">Back to top <svg class="cta-arrow cta-arrow--up" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg></a>
+        </div>
+
+        <div class="signoff-body">
+          <nav class="foot-nav" aria-label="Sections" data-stage>
+            <a href="#about" data-reveal="letters" data-delay="260" data-stagger="22" data-cfg="row" data-gap="0.2">About</a>
+            <a href="#projects" data-reveal="letters" data-delay="340" data-stagger="22" data-cfg="row" data-gap="0.2">Work</a>
+            <a href="#skills" data-reveal="letters" data-delay="420" data-stagger="22" data-cfg="row" data-gap="0.2">Skills</a>
+            <a href="#certifications" data-reveal="letters" data-delay="500" data-stagger="22" data-cfg="row" data-gap="0.2">Credentials</a>
+            <a href="#contact" data-reveal="letters" data-delay="580" data-stagger="22" data-cfg="row" data-gap="0.2" aria-current="page">Contact</a>
+          </nav>
+
+          <div class="contact-copy" data-stage>
+            <p class="kicker" data-rise data-delay="0">05 — Let’s talk</p>
+            <h2 id="contact-title" class="masthead masthead--accent masthead--contact">
+              <span class="ml"><span data-reveal="words" data-delay="0" data-stagger="90" data-cfg="reveal">Looking for an onsite</span></span>
+              <span class="ml"><span data-reveal="words" data-delay="130" data-stagger="90" data-cfg="reveal">IT intern in Metro Manila?</span></span>
+            </h2>
+            <p class="contact-lead" data-rise data-delay="300" data-cfg="copy">Email is the best way to reach me about internship and OJT opportunities.</p>
+            <div class="contact-actions" data-rise data-delay="420" data-cfg="copy">
+              <a class="cta cta--lg contact-email" href="mailto:bernabemaboloc3@gmail.com?subject=Internship%20opportunity">
+                <span class="cta-flood" aria-hidden="true"></span>
+                <span class="cta-label">bernabemaboloc3@gmail.com</span>
+                <svg class="cta-arrow" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg>
               </a>
-              <button class="btn btn-ghost copy-btn" type="button" data-copy="bernabemaboloc3@gmail.com">
-                <svg class="icon icon-copy" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 5.5v-.5a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 5v8A1.5 1.5 0 0 0 6 14.5h.5"/></svg>
-                <svg class="icon icon-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
-                <span class="copy-label">Copy email</span>
+              <button class="cta cta--ghost copy-btn" type="button" data-copy="bernabemaboloc3@gmail.com">
+                <span class="cta-flood" aria-hidden="true"></span>
+                <span class="cta-label"><span class="copy-label">Copy email</span></span>
               </button>
-              <a class="btn btn-ghost" href="https://github.com/MabsB" target="_blank" rel="noopener">
-                GitHub: MabsB
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6h9v9M18 6 6 18"/></svg>
-                <span class="visually-hidden">(opens in a new tab)</span>
+              <a class="cta cta--ghost" href="https://github.com/MabsB" target="_blank" rel="noopener">
+                <span class="cta-flood" aria-hidden="true"></span>
+                <span class="cta-label">GitHub: MabsB<span class="visually-hidden"> (opens in a new tab)</span></span>
+                <svg class="cta-arrow" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg>
               </a>
             </div>
             <p class="visually-hidden" id="copy-status" aria-live="polite"></p>
-          </div>
 
-          <div id="resume" class="resume-card" aria-labelledby="resume-title">
-            <svg class="doc-art" viewBox="0 0 72 92" aria-hidden="true" focusable="false">
-              <rect class="doc-sheet" x="1" y="1" width="70" height="90" rx="8"/>
-              <rect class="doc-line doc-line--strong" x="10" y="12" width="40" height="6" rx="2"/>
-              <rect class="doc-line" x="10" y="22" width="28" height="3" rx="1.5"/>
-              <rect class="doc-accent" x="10" y="32" width="52" height="1.5" rx=".75"/>
-              <rect class="doc-line" x="10" y="40" width="50" height="3" rx="1.5"/>
-              <rect class="doc-line" x="10" y="47" width="44" height="3" rx="1.5"/>
-              <rect class="doc-accent" x="10" y="58" width="52" height="1.5" rx=".75"/>
-              <rect class="doc-line" x="10" y="66" width="48" height="3" rx="1.5"/>
-              <rect class="doc-line" x="10" y="73" width="36" height="3" rx="1.5"/>
-            </svg>
-            <div class="resume-copy">
-              <h3 id="resume-title">Resume</h3>
-              <p class="resume-meta">PDF, 1 page, 53 KB. Updated October 2026.</p>
-              <div class="resume-actions">
-                <a class="btn btn-primary btn-sm" href="assets/resume/Bernabe-Maboloc-Jr-Resume.pdf" download="Bernabe-Maboloc-Jr-Resume.pdf">
-                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg>
-                  Download PDF
-                </a>
-                <a class="btn btn-ghost btn-sm" href="assets/resume/Bernabe-Maboloc-Jr-Resume.pdf" target="_blank" rel="noopener">
-                  Open
-                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6h9v9M18 6 6 18"/></svg>
-                  <span class="visually-hidden">(opens in a new tab)</span>
-                </a>
+            <div id="resume" class="resume-card panel" data-rise data-delay="520" data-cfg="copy" aria-labelledby="resume-title">
+              <svg class="doc-art" viewBox="0 0 72 92" aria-hidden="true" focusable="false">
+                <rect class="doc-sheet" x="1" y="1" width="70" height="90" rx="8"/>
+                <rect class="doc-line doc-line--strong" x="10" y="12" width="40" height="6" rx="2"/>
+                <rect class="doc-line" x="10" y="22" width="28" height="3" rx="1.5"/>
+                <rect class="doc-accent" x="10" y="32" width="52" height="1.5" rx=".75"/>
+                <rect class="doc-line" x="10" y="40" width="50" height="3" rx="1.5"/>
+                <rect class="doc-line" x="10" y="47" width="44" height="3" rx="1.5"/>
+                <rect class="doc-accent" x="10" y="58" width="52" height="1.5" rx=".75"/>
+                <rect class="doc-line" x="10" y="66" width="48" height="3" rx="1.5"/>
+                <rect class="doc-line" x="10" y="73" width="36" height="3" rx="1.5"/>
+              </svg>
+              <div class="resume-copy">
+                <h3 id="resume-title">Resume</h3>
+                <p class="resume-meta">PDF, 1 page, 53 KB. Updated October 2026.</p>
+                <div class="resume-actions">
+                  <a class="cta cta--sm" href="assets/resume/Bernabe-Maboloc-Jr-Resume.pdf" download="Bernabe-Maboloc-Jr-Resume.pdf">
+                    <span class="cta-flood" aria-hidden="true"></span>
+                    <span class="cta-label">Download PDF</span>
+                    <svg class="cta-arrow cta-arrow--down" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg>
+                  </a>
+                  <a class="cta cta--sm cta--ghost" href="assets/resume/Bernabe-Maboloc-Jr-Resume.pdf" target="_blank" rel="noopener">
+                    <span class="cta-flood" aria-hidden="true"></span>
+                    <span class="cta-label">Open<span class="visually-hidden"> (opens in a new tab)</span></span>
+                    <svg class="cta-arrow" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <footer class="site-footer" data-stage data-stage-margin="0px">
+          <p class="legal" data-rise data-delay="640">© <span data-year>2026</span> Bernabe Bertiz Maboloc Jr.</p>
+          <p class="legal-note" data-rise data-delay="720">Built by hand with HTML, CSS and JavaScript.</p>
+          <p class="socials" data-rise data-delay="800"><a href="https://github.com/MabsB" target="_blank" rel="noopener">GitHub<span class="visually-hidden"> (opens in a new tab)</span></a><a href="mailto:bernabemaboloc3@gmail.com?subject=Internship%20opportunity">Email</a></p>
+        </footer>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span data-year>2026</span> Bernabe Bertiz Maboloc Jr.</p>
-      <p class="footer-links"><a href="https://github.com/MabsB" target="_blank" rel="noopener">GitHub<span class="visually-hidden"> (opens in a new tab)</span></a><a href="#home">Back to top</a></p>
-    </div>
-  </footer>
-
-  <!-- Phone-only shortcut bar: the two things a recruiter wants most. -->
   <div class="action-bar" aria-label="Quick actions" role="region">
-    <a class="btn btn-ghost" href="assets/resume/Bernabe-Maboloc-Jr-Resume.pdf" download="Bernabe-Maboloc-Jr-Resume.pdf">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg>
-      Resume
+    <a class="cta cta--ghost" href="assets/resume/Bernabe-Maboloc-Jr-Resume.pdf" download="Bernabe-Maboloc-Jr-Resume.pdf">
+      <span class="cta-flood" aria-hidden="true"></span>
+      <span class="cta-label">Resume</span>
+      <svg class="cta-arrow cta-arrow--down" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg>
     </a>
-    <a class="btn btn-primary" href="mailto:bernabemaboloc3@gmail.com?subject=Internship%20opportunity">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
-      Email me
+    <a class="cta" href="mailto:bernabemaboloc3@gmail.com?subject=Internship%20opportunity">
+      <span class="cta-flood" aria-hidden="true"></span>
+      <span class="cta-label">Email me</span>
+      <svg class="cta-arrow" viewBox="0 0 13 10.7" aria-hidden="true" focusable="false"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35"/></svg>
     </a>
   </div>
 
   <script src="content/skills.js" defer></script>
   <script src="content/projects.js" defer></script>
   <script src="content/certificates.js" defer></script>
+  <script src="assets/js/motion.js" defer></script>
+  <script src="assets/js/fx.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
